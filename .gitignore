@@ -1,0 +1,17 @@
+# Environment variables
+.env
+.streamlit/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+*.bin
+
+# Database
+mystery_chroma_db/
+chroma_db/
+
+# OS specific
+.DS_Store

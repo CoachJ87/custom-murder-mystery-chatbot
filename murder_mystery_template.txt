@@ -1,0 +1,242 @@
+I'd like you to help me create a custom murder mystery party game. Please start by asking me these key questions one at a time, waiting for my response to each before continuing:
+
+1. What theme would I like for the murder mystery? (Examples: 1920s Speakeasy, Space Station, Tropical Resort, Victorian Manor)
+2. How many players will participate? (Typically 8-15 players)
+3. Would I like to include an accomplice mechanism where two players work together as the murderer and accomplice?
+4. Any specific preferences for game duration or complexity level?
+5. Full scripts or point form summaries? (Let's the host decide how on-script everything needs to be vs. just giving a jist)
+
+After I answer these initial questions, please:
+
+1. Create a compelling victim character and murder scenario that fits my chosen theme
+2. Suggest a list of character types appropriate for my theme and player count
+3. Develop a basic premise for the murder mystery
+
+Then, once I approve these elements, please develop the complete game package following these detailed formats:
+
+[HOST GUIDE FORMAT]
+
+# [GAME TITLE] - HOST GUIDE
+
+## GAME OVERVIEW
+
+[Brief description of the game premise]
+
+## MATERIALS NEEDED
+
+- [List of all physical materials needed]
+- [Include printables, props, etc.]
+
+## BEFORE THE PARTY
+
+1. [Step-by-step preparation instructions]
+2. [Character assignment guidance]
+3. [Setup instructions]
+
+## DETERMINING THE MURDERER
+
+[Detailed explanation of the random selection process]
+
+## ACCOMPLICE MECHANISM (if applicable)
+
+[Explanation of how the accomplice is determined and communicated]
+
+## GAME TIMELINE
+
+- Welcome & Setup: [time] minutes
+- Opening & Introductions: [time] minutes
+- Murderer Determination: [time] minutes
+- Round 1: [time] minutes
+- Round 2: [time] minutes
+- Round 3: [time] minutes
+- Accusations & Resolution: [time] minutes
+
+## ROUND-BY-ROUND INSTRUCTIONS
+
+### ROUND 1: [TITLE]
+
+[Detailed instructions]
+
+### ROUND 2: [TITLE]
+
+[Detailed instructions]
+
+### ROUND 3: [TITLE]
+
+[Detailed instructions]
+
+### ACCUSATIONS
+
+[Instructions for handling accusations]
+
+### FINAL REVEAL
+
+[Instructions for the reveal and conclusion]
+
+## HOSTING TIPS
+
+- [3-5 specific hosting tips]
+
+[CHARACTER GUIDE FORMAT]
+
+# [CHARACTER NAME] - CHARACTER GUIDE
+
+## CHARACTER DESCRIPTION
+
+[Detailed description of the character]
+
+## YOUR BACKGROUND
+
+[200-300 word background story]
+
+## YOUR RELATIONSHIPS
+
+- **[Victim's Name]**: [Detailed relationship with victim]
+- **[Character 1]**: [Specific relationship details]
+- **[Character 2]**: [Specific relationship details]
+- [Continue for all relevant characters]
+
+## YOUR SECRETS
+
+1. [Secret 1]
+2. [Secret 2]
+3. [Secret 3]
+4. [Secret 4]
+
+## YOUR WHEREABOUTS DURING THE MURDER
+
+[Detailed alibi explanation]
+
+## ROUND 1: INITIAL INVESTIGATION
+
+### YOUR INTRODUCTION
+
+"[Script for self-introduction]"
+
+### CHOOSE SOMEONE TO QUESTION
+
+- Ask [Character 1]: "[Specific question related to their relationship with victim or suspicious behavior]"
+- Ask [Character 2]: "[Specific question related to evidence or motive]"
+- [Continue for 5-6 different characters]
+
+### YOUR RESPONSES WHEN QUESTIONED
+
+**IF YOU ARE INNOCENT:**
+"[Detailed response maintaining innocence while explaining suspicious circumstances]"
+
+**IF YOU ARE GUILTY:**
+"[Detailed response that deflects suspicion while hinting at true motive]"
+
+## ROUND 2: [TITLE]
+
+### CHOOSE SOMEONE TO QUESTION
+
+- Ask [Character 1]: "[Question related to new evidence]"
+- Ask [Character 2]: "[Question related to contradictions in their story]"
+- [Continue for 5-6 different characters]
+
+### YOUR RESPONSES WHEN QUESTIONED
+
+**IF YOU ARE INNOCENT:**
+"[Detailed innocent response addressing new evidence]"
+
+**IF YOU ARE GUILTY:**
+"[Detailed guilty response that continues to deflect while revealing more]"
+
+## ROUND 3: [TITLE]
+
+### CHOOSE SOMEONE TO QUESTION
+
+- Ask [Character 1]: "[Question related to final revelations]"
+- Ask [Character 2]: "[Question directly accusing or challenging]"
+- [Continue for 5-6 different characters]
+
+### YOUR RESPONSES WHEN QUESTIONED
+
+**IF YOU ARE INNOCENT:**
+"[Final defense of innocence]"
+
+**IF YOU ARE GUILTY:**
+"[Final deflection before revelation]"
+
+## FINAL STATEMENT
+
+**IF YOU ARE INNOCENT:**
+"[Emotional statement proclaiming innocence]"
+
+**IF YOU ARE GUILTY:**
+"[Dramatic confession explaining motives and how the murder was committed]"
+
+[DETECTIVE SCRIPT FORMAT]
+
+# DETECTIVE SCRIPT
+
+## OPENING STATEMENT
+
+"[Full script introducing the murder and investigation]"
+
+## ROUND 1: [TITLE]
+
+"[Script introducing first round and evidence]"
+
+## ROUND 2: [TITLE]
+
+"[Script introducing second round and new evidence]"
+
+## ROUND 3: [TITLE]
+
+"[Script introducing final round and revealing crucial evidence]"
+
+## ACCUSATIONS AND RESOLUTION
+
+"[Script for handling accusations]"
+
+## FINAL REVEAL
+
+"[Script for revealing the murderer and accomplice]"
+
+[EVIDENCE CARD FORMAT]
+
+# EVIDENCE: [ROUND NUMBER]
+
+## [EVIDENCE NAME]
+
+[Detailed description of evidence]
+
+## IMPLICATIONS
+
+[What this evidence suggests]
+
+## VISUAL DESCRIPTION
+
+[How to present this evidence to players]
+
+[RELATIONSHIP MATRIX FORMAT]
+
+# CHARACTER RELATIONSHIP MATRIX
+
+| Character | Primary Connection | Secondary Connections | Secret Connections |
+| --- | --- | --- | --- |
+| [Name 1] | [Character] | [Characters] | [Characters] |
+| [Name 2] | [Character] | [Characters] | [Characters] |
+| [Continue for all characters] |  |  |  |
+
+## PRIMARY CONNECTIONS EXPLAINED
+
+[Explanation of how primary connections work for accomplice determination]
+
+Please develop full, detailed content for all components following these formats. 
+
+Each character should have unique motivations, detailed relationships with others, and plausible, believe reasons to be both innocent and guilty. Take your time to think through this part in great detail. Every character's motives should be very strong so that anyone could think it was them at the source of the murder. 
+
+Make sure that each character's name is gender neutral OR can be used in either the feminine of masculine depending on who is playing them (ex: Gabriel/Gabriella). For characters, make sure that the ROLES that they play are gender neutral OR challenge gender norms. For example, don't always have the secretary be a woman or the powerful business person be a man. 
+
+When creating the character profiles, think through each connection & the secrets to ensure perfect logic. Double check everything if necessary to make sure this is accurate - a mix up ruins the reality of the game. 
+
+When making the secrets, make sure that the person who the secret is about knows why they would not want their secret to be leaked - make it extra clear and obvious and why this might be tied to their motive for the murder. Make sure that each character is only hiding 1 secret so that it is not confusing for the actors/actresses to remember.
+
+Make sure the round instructions in each character guide are clear. This is especially important when they are sharing gossip - make to say exactly what they should share which should only be 3 to 4 pieces. Also make sure that characters have overlapping pieces of gossip in case something doesn't get shared.
+
+Also make sure to share very clear instructions about the accomplice, either in the host guide and/or the character guides. Characters should be very clear what to do if they have an accomplice (to inform them).
+
+The game should work regardless of which character is randomly selected as the murderer.
