@@ -5,6 +5,5 @@ python-dotenv
 anthropic
 langchain-text-splitters
 langchain-community
-langchain-chroma
-langchain-huggingface
+langchain-faiss
 sentence-transformers
