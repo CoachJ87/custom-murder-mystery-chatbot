@@ -54,29 +54,21 @@ if prompt := st.chat_input("Ask about creating your murder mystery..."):
         message_placeholder = st.empty()
         
         # Format messages for Anthropic
-        messages_for_api = [
-            {"role": "system", "content": st.session_state.system_prompt}
-        ]
+        messages_for_api = []
         
-        # Add conversation history
+        # Add conversation history (excluding system message)
         for msg in st.session_state.messages:
             if msg["role"] == "user":
                 messages_for_api.append({"role": "user", "content": msg["content"]})
-            else:
+            elif msg["role"] == "assistant":
                 messages_for_api.append({"role": "assistant", "content": msg["content"]})
-        
-        # Remove the last user message since we already added it to the history
-        if messages_for_api[-1]["role"] == "user":
-            messages_for_api.pop()
-        
-        # Add the current user's message
-        messages_for_api.append({"role": "user", "content": prompt})
         
         try:
             # Get response from Anthropic
             client = get_anthropic_client()
             response = client.messages.create(
                 model="claude-3-7-sonnet-20250219",
+                system=st.session_state.system_prompt,  # System prompt goes here as a parameter
                 messages=messages_for_api,
                 temperature=0.7,
                 max_tokens=1000
