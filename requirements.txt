@@ -1,4 +1,2 @@
 streamlit
-langchain
-langchain-anthropic
 anthropic
