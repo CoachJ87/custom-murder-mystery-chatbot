@@ -1,23 +1,16 @@
 import streamlit as st
 from langchain_anthropic import ChatAnthropic
 from langchain.memory import ConversationBufferMemory
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain.chains import ConversationalRetrievalChain
-from langchain_community.vectorstores import FAISS
-from langchain.schema import Document
-from langchain_community.embeddings import HuggingFaceEmbeddings
-import os
+from langchain.chains import ConversationChain
+from langchain.prompts import PromptTemplate
 
 # Page configuration
 st.set_page_config(page_title="Murder Mystery Assistant", page_icon="🔍")
 st.title("🔍 Murder Mystery Assistant")
 
-# Initialize the chain
 @st.cache_resource
 def initialize_chain():
-    embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    
-    # Load murder mystery template directly
+    # Try to load the template content
     try:
         with open("murder_mystery_template.txt", "r") as file:
             template_content = file.read()
@@ -28,15 +21,20 @@ def initialize_chain():
         and a satisfying resolution. Create memorable characters and an atmospheric setting.
         """
     
-    # Create a document
-    documents = [Document(page_content=template_content, metadata={"source": "murder_mystery_template.txt"})]
+    # Create a template with the murder mystery guide embedded
+    template = f"""You are a Murder Mystery Writing Assistant. Use the following guidelines to help users craft engaging murder mysteries:
+
+    {template_content}
+
+    Current conversation:
+    {{chat_history}}
+    Human: {{input}}
+    AI Assistant:"""
     
-    # Split document
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-    texts = text_splitter.split_documents(documents)
-    
-    # Create a vector store using FAISS (in-memory)
-    vectorstore = FAISS.from_documents(texts, embedding_model)
+    prompt = PromptTemplate(
+        input_variables=["chat_history", "input"], 
+        template=template
+    )
     
     # Initialize the LLM
     llm = ChatAnthropic(
@@ -46,29 +44,24 @@ def initialize_chain():
     )
     
     # Set up conversation memory
-    memory = ConversationBufferMemory(
-        memory_key="chat_history",
-        return_messages=True,
-        output_key="answer"
-    )
+    memory = ConversationBufferMemory(return_messages=True)
     
-    # Create the conversational retrieval chain
-    qa_chain = ConversationalRetrievalChain.from_llm(
-        llm=llm,
-        retriever=vectorstore.as_retriever(search_kwargs={"k": 3}),
+    # Create the chain
+    conversation = ConversationChain(
+        llm=llm, 
+        verbose=False, 
         memory=memory,
-        return_source_documents=True,
-        verbose=False
+        prompt=prompt
     )
     
-    return qa_chain
+    return conversation
 
 # Initialize session state for chat history
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Hello! I'm your Murder Mystery Assistant. How can I help you craft the perfect mystery today?"}]
 
 # Initialize the chain
-qa_chain = initialize_chain()
+conversation = initialize_chain()
 
 # Display chat messages
 for message in st.session_state.messages:
@@ -89,8 +82,7 @@ if prompt := st.chat_input("Ask about creating your murder mystery..."):
         message_placeholder = st.empty()
         
         # Get the answer from the chain
-        result = qa_chain({"question": prompt})
-        response = result["answer"]
+        response = conversation.predict(input=prompt)
         
         # Display the response
         message_placeholder.write(response)
