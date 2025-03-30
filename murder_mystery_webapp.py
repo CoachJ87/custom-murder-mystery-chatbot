@@ -1,67 +1,39 @@
 import streamlit as st
-from langchain_anthropic import ChatAnthropic
-from langchain.memory import ConversationBufferMemory
-from langchain.chains import ConversationChain
-from langchain.prompts import PromptTemplate
+import os
+from anthropic import Anthropic
 
 # Page configuration
 st.set_page_config(page_title="Murder Mystery Assistant", page_icon="🔍")
 st.title("🔍 Murder Mystery Assistant")
 
-@st.cache_resource
-def initialize_chain():
-    # Try to load the template content
-    try:
-        with open("murder_mystery_template.txt", "r") as file:
-            template_content = file.read()
-    except FileNotFoundError:
-        template_content = """
-        Murder Mystery Writing Guide:
-        A good murder mystery has an intriguing detective, red herrings, plot twists,
-        and a satisfying resolution. Create memorable characters and an atmospheric setting.
-        """
-    
-    # Create a template with the murder mystery guide embedded
-    template = f"""You are a Murder Mystery Writing Assistant. Use the following guidelines to help users craft engaging murder mysteries:
+# Try to load the template content
+try:
+    with open("murder_mystery_template.txt", "r") as file:
+        template_content = file.read()
+except FileNotFoundError:
+    template_content = """
+    Murder Mystery Writing Guide:
+    A good murder mystery has an intriguing detective, red herrings, plot twists,
+    and a satisfying resolution. Create memorable characters and an atmospheric setting.
+    """
 
-    {template_content}
-
-    Current conversation:
-    {{chat_history}}
-    Human: {{input}}
-    AI Assistant:"""
-    
-    prompt = PromptTemplate(
-        input_variables=["chat_history", "input"], 
-        template=template
-    )
-    
-    # Initialize the LLM
-    llm = ChatAnthropic(
-        model="claude-3-7-sonnet-20250219",
-        temperature=0.7,
-        anthropic_api_key=st.secrets["ANTHROPIC_API_KEY"]
-    )
-    
-    # Set up conversation memory
-    memory = ConversationBufferMemory(return_messages=True)
-    
-    # Create the chain
-    conversation = ConversationChain(
-        llm=llm, 
-        verbose=False, 
-        memory=memory,
-        prompt=prompt
-    )
-    
-    return conversation
+# Initialize Anthropic client
+def get_anthropic_client():
+    return Anthropic(api_key=st.secrets["ANTHROPIC_API_KEY"])
 
 # Initialize session state for chat history
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Hello! I'm your Murder Mystery Assistant. How can I help you craft the perfect mystery today?"}]
+    st.session_state.messages = [{
+        "role": "assistant", 
+        "content": "Hello! I'm your Murder Mystery Assistant. How can I help you craft the perfect mystery today?"
+    }]
 
-# Initialize the chain
-conversation = initialize_chain()
+if "system_prompt" not in st.session_state:
+    st.session_state.system_prompt = f"""You are a Murder Mystery Writing Assistant. Use the following guidelines to help users craft engaging murder mysteries:
+
+{template_content}
+
+Be creative, helpful, and provide detailed suggestions when asked."""
 
 # Display chat messages
 for message in st.session_state.messages:
@@ -81,11 +53,42 @@ if prompt := st.chat_input("Ask about creating your murder mystery..."):
     with st.chat_message("assistant"):
         message_placeholder = st.empty()
         
-        # Get the answer from the chain
-        response = conversation.predict(input=prompt)
+        # Format messages for Anthropic
+        messages_for_api = [
+            {"role": "system", "content": st.session_state.system_prompt}
+        ]
         
-        # Display the response
-        message_placeholder.write(response)
-    
-    # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
+        # Add conversation history
+        for msg in st.session_state.messages:
+            if msg["role"] == "user":
+                messages_for_api.append({"role": "user", "content": msg["content"]})
+            else:
+                messages_for_api.append({"role": "assistant", "content": msg["content"]})
+        
+        # Remove the last user message since we already added it to the history
+        if messages_for_api[-1]["role"] == "user":
+            messages_for_api.pop()
+        
+        # Add the current user's message
+        messages_for_api.append({"role": "user", "content": prompt})
+        
+        try:
+            # Get response from Anthropic
+            client = get_anthropic_client()
+            response = client.messages.create(
+                model="claude-3-7-sonnet-20250219",
+                messages=messages_for_api,
+                temperature=0.7,
+                max_tokens=1000
+            )
+            
+            result = response.content[0].text
+            
+            # Display the response
+            message_placeholder.write(result)
+            
+            # Add assistant response to chat history
+            st.session_state.messages.append({"role": "assistant", "content": result})
+            
+        except Exception as e:
+            message_placeholder.write(f"An error occurred: {str(e)}")
