@@ -23,7 +23,7 @@ except FileNotFoundError:
 
 # Initialize OpenAI client
 def get_openai_client():
-    return OpenAI(api_key=st.secrets["OPENAI_API_KEY"])  # Changed from ANTHROPIC_API_KEY
+    return OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Initialize session state for chat history
 if "messages" not in st.session_state:
@@ -70,26 +70,27 @@ if prompt := st.chat_input("Ask about creating your murder mystery..."):
         else:
             # Format messages for OpenAI
             messages_for_api = []
-
+            
             # Add system message first for OpenAI
             messages_for_api.append({"role": "system", "content": st.session_state.system_prompt})
-                        
-            # Add conversation history (excluding system message)
-             for msg in st.session_state.messages:
-                messages_for_api.append({"role": msg["role"], "content": msg["content"]})
+            
+            # Add conversation history
+            for msg in st.session_state.messages:
+                # Skip the system prompt from history (it's already added above)
+                if msg.get("role") != "system":
+                    messages_for_api.append({"role": msg["role"], "content": msg["content"]})
             
             try:
-                # Get response from Anthropic
+                # Get response from OpenAI
                 client = get_openai_client()
-                response = client.messages.create(
-                    model="gpt-4o",
-                    system=st.session_state.system_prompt,  # System prompt goes here as a parameter
+                response = client.chat.completions.create(
+                    model="gpt-4",  # or "gpt-3.5-turbo" for cheaper option
                     messages=messages_for_api,
                     temperature=0.7,
                     max_tokens=1000
                 )
                 
-                result = response.content[0].text
+                result = response.choices[0].message.content
                 
                 # Display the response
                 message_placeholder.write(result)
